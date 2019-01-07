@@ -69,6 +69,15 @@
   font-size: 17px;
 }
 
+.topnav p {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
 /* Change the color of links on hover */
 .topnav a:hover {
   background-color: #ddd;
@@ -88,7 +97,8 @@
 		</style>
 		<style>
 .vertical-menu {
-  width: 300px; /* Set a width if you like */
+  width: 25%; /* Set a width if you like */
+  
 }
 
 .vertical-menu a {
@@ -119,16 +129,21 @@
     <body>
 		<div class="topnav">
 		<a href="#home">Halaman Utama</a>
-		<a class="active" href="#drone">Drone Planner</a>
-		<a href="#waypoints">Waypoint</a>
+		<a class="active" href="#news">Drone</a>
+		<a href="#contact">Waypoint</a>
+		<div class="topnav-right">
+		<a href="#search">Nama Drone</a>
+		</div>
 		</div>
 		<div class="vertical-menu">
 		<p>Drone Telemetry Data</p>
 		<p>Latitude: -7.26668</p>
 		<p>Longitude: 112.79997</p>
 		<p>Altitude: 100 m</p>
-		<p>Heading: 270</p>
+		<p>Heading: 270 deg</p>
 		<p>Speed: 5 kt</p>
+		<br><br>
+		<p>Nama Drone</p>
 		</div>
         <div id="map">
             <div id="popup" class="ol-popup">
