@@ -82,6 +82,28 @@
   float: right;
 }
 		</style>
+		<style>
+.vertical-menu {
+  width: 200px; /* Set a width if you like */
+}
+
+.vertical-menu a {
+  background-color: #eee; /* Grey background color */
+  color: black; /* Black text color */
+  display: block; /* Make the links appear below each other */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc; /* Dark grey background on mouse-over */
+}
+
+.vertical-menu a.active {
+  background-color: #4CAF50; /* Add a green color to the "active/current" link */
+  color: white;
+}
+		</style>
         <title></title>
     </head>
     <body>
@@ -89,6 +111,9 @@
 		<a class="active" href="#home">Halaman Utama</a>
 		<a href="#drone">Drone Planner</a>
 		<a href="#waypoints">Waypoint</a>
+		</div>
+		<div class="vertical-menu">
+		<p>Drone Telemetry Data</p>
 		</div>
         <div id="map">
             <div id="popup" class="ol-popup">
@@ -105,6 +130,5 @@
         <script src="./resources/qgis2web.js"></script>
         <script src="./resources/Autolinker.min.js"></script>
 		
-		<
     </body>
 </html>
