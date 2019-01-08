@@ -148,7 +148,7 @@
 		var marker = new L.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
 		polyline.addLatLng(e.latlng);
 		//popup.setContent("test").openOn(map);
-		var list = "<p>Waypoint</p>" + marker.getLatLng() + "<br>" + "<p>remove</p>"
+		var list = "<p>Waypoint</p>" + marker.getLatLng() + "<br>" + "<br>" +"<button>Hapus Waypoint Ini!</button>"
 		marker.bindPopup(list).openPopup();
 		})
 		var customControl =  L.Control.extend({
