@@ -143,12 +143,36 @@
         });
         layer_test_0.addTo(map);
         map.addLayer(layer_test_0);
+		var polyline = new L.Polyline([]).addTo(map);
 		map.on("click", function(e){
 		var marker = new L.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+		polyline.addLatLng(e.latlng);
 		//popup.setContent("test").openOn(map);
 		var list = "<p>Waypoint</p>" + marker.getLatLng() + "<br>" + "<p>remove</p>"
 		marker.bindPopup(list).openPopup();
 		})
+		var customControl =  L.Control.extend({
+
+  options: {
+    position: 'topleft'
+  },
+
+  onAdd: function (map) {
+    var container = L.DomUtil.create('div', 'leaflet-bar leaflet-control leaflet-control-custom');
+
+    container.style.backgroundColor = 'white';     
+    container.style.backgroundImage = "url(https://t1.gstatic.com/images?q=tbn:ANd9GcR6FCUMW5bPn8C4PbKak2BJQQsmC-K9-mbYBeFZm1ZM2w2GRy40Ew)";
+    container.style.backgroundSize = "30px 30px";
+    container.style.width = '30px';
+    container.style.height = '30px';
+
+    container.onclick = function(){
+      console.log('buttonClicked');
+    }
+
+    return container;
+  }
+});
         setBounds();
         </script>
     </body>
