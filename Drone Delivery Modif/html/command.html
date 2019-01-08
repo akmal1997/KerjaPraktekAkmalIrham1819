@@ -34,30 +34,7 @@
 		</div>
 		{% include 'bottom-scripts.html' %}
 		<script type="text/javascript" charset="utf-8">
-			L.mapbox.accessToken = '{{options.access_token}}';
-			var currentCoords = [{{ options.current_coords[0] }}, {{ options.current_coords[1] }}];
-			var homeCoords = [{{ options.home_coords[0] }}, {{ options.home_coords[1] }}];
-			var homeMarker = L.marker(homeCoords, {
-				icon: L.mapbox.marker.icon({
-					'marker-size': 'small',
-					'marker-symbol': 'building',
-					'marker-color': '#fa0'
-				})
-			});
-			var vehicleMarker = function(location){
-				return L.marker(location, {
-					'marker-size': 'large',
-					'marker-symbol': 'heliport',
-					'marker-color': '#fa0'
-				})
-			}
-			var map = L.mapbox.map('map', '{{options.mapid}}');
-			var userMarker = L.marker([0, 0], {
-				icon: L.mapbox.marker.icon({
-					'marker-color': '#f86767'
-				}),
-				draggable: true
-			});
+
 
 			homeMarker.addTo(map);
 			vehicleMarker(currentCoords).addTo(map);
