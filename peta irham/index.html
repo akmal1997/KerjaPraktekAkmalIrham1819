@@ -144,9 +144,20 @@
         layer_test_0.addTo(map);
         map.addLayer(layer_test_0);
 		var polyline = new L.Polyline([]).addTo(map);
+		
+		var marker = []
+		/*function createMarker (coords) {
+			var id;
+			if (marker.length < 1) id=0;
+			else id = marker[marker.length - 1]._id + 1
+			var popupContent = "<p>Waypoint</p>" + marker.getLatLng() + "<br>" + "<br>" +"<button>Hapus Waypoint Ini!</button>";
+			myMarker = L.Marker
+		};*/
 		map.on("click", function(e){
-		var marker = new L.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+		marker = new L.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
+		//var id = marker[marker.length - 1]._id + 1
 		polyline.addLatLng(e.latlng);
+		//marker._id = id
 		//popup.setContent("test").openOn(map);
 		var list = "<p>Waypoint</p>" + marker.getLatLng() + "<br>" + "<br>" +"<button>Hapus Waypoint Ini!</button>"
 		marker.bindPopup(list).openPopup();
