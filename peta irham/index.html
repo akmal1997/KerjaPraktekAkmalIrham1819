@@ -176,6 +176,7 @@ function clearMarker(id) {
 		//marker = new L.Marker([-6.7922, 106.954]).addTo(map);
 		//var polyline = L.polyline(markers, {color: 'red'}).addTo(map);
 		var id = 0;
+		var test;
 
 		function createMarker (coords) {
 			var id;
@@ -187,6 +188,8 @@ function clearMarker(id) {
 			var myPopup = myMarker.bindPopup(popupContent);
 			map.addLayer(myMarker);
 			marker.push(myMarker);
+			//var polyline = new L.Polyline(marker);
+			//map.addLayer(polyline);
 		}
 
 		function clearMarker (id) {
@@ -197,6 +200,9 @@ function clearMarker(id) {
 				else new_markers.push(mark);
 			})
 			marker = new_markers;
+			//var newPolyline = new L.Polyline(marker);
+			//map.removeLayer(test);
+			//map.addLayer(newPolyLine);
 		}
 
 		map.on("click", function(e){
@@ -205,24 +211,14 @@ function clearMarker(id) {
 		
 		/*marker = new L.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
 		id=id+1;*/
-		polyline.addLatLng(e.latlng);
-<<<<<<< HEAD
+		test = polyline.addLatLng(e.latlng);
+		/*test = new L.Polyline(e.latlng);
+		map.addLayer(test);*/
 		/*var list = "<p>Waypoint</p>" + marker.getLatLng() + id + "<br>" + "<br>" +"<button>Hapus Waypoint Ini!</button>"
 		marker.bindPopup(list).openPopup();*/
-=======
-
-		//marker._id = id
-		//popup.setContent("test").openOn(map);
-		var list = "<p>Waypoint</p>" + marker.getLatLng() + "<br>" + "<br>" +"<button>Hapus Waypoint Ini!</button>"
-
-		marker.bindPopup(list).openPopup();
-
->>>>>>> master
 		})
 
 		var customControl =  L.Control.extend({
-
-
 
   options: {
     position: 'topleft'
