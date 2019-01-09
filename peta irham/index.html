@@ -206,11 +206,23 @@ function clearMarker(id) {
 		/*marker = new L.Marker([e.latlng.lat, e.latlng.lng]).addTo(map);
 		id=id+1;*/
 		polyline.addLatLng(e.latlng);
+<<<<<<< HEAD
 		/*var list = "<p>Waypoint</p>" + marker.getLatLng() + id + "<br>" + "<br>" +"<button>Hapus Waypoint Ini!</button>"
 		marker.bindPopup(list).openPopup();*/
+=======
+
+		//marker._id = id
+		//popup.setContent("test").openOn(map);
+		var list = "<p>Waypoint</p>" + marker.getLatLng() + "<br>" + "<br>" +"<button>Hapus Waypoint Ini!</button>"
+
+		marker.bindPopup(list).openPopup();
+
+>>>>>>> master
 		})
 
 		var customControl =  L.Control.extend({
+
+
 
   options: {
     position: 'topleft'
