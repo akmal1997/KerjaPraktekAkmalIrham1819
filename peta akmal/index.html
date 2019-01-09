@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            position: absolute;
+			width: 1100px;
+            height: 600px;
+			left: 260px;
+			top: 70px;
+			right: 100px;
+        }
+        </style>
+				<style>
+		/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #333;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav p {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/* Right-aligned section inside the top navigation */
+.topnav-right {
+  float: right;
+}
+		</style>
+		<style>
+.vertical-menu {
+  width: 30%; /* Set a width if you like */
+  
+}
+
+.vertical-menu a {
+  background-color: #eee; /* Grey background color */
+  color: black; /* Black text color */
+  display: block; /* Make the links appear below each other */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc; /* Dark grey background on mouse-over */
+}
+
+.vertical-menu a.active {
+  background-color: #4CAF50; /* Add a green color to the "active/current" link */
+  color: white;
+}
+
+.vertical-menu p {
+	color: blue;
+	font-size: 14pt;
+	
+}
+		</style>
+		<style>
+		.right-menu {
+		width = 100%
+		}
+		</style>
+        <title></title>
+    </head>
+    <body>
+		<div class="topnav">
+		<a href="#home">Halaman Utama</a>
+		<a class="active" href="#drone">Drone</a>
+		<a href="#waypoint">Waypoint</a>
+		<div class="topnav-right">
+		<a href="#">Nama Drone</a>
+		</div>
+		</div>
+		<div class="vertical-menu">
+		<p>Drone Telemetry Data</p>
+		<br>
+		<p>Latitude: -7.26668</p>
+		<p>Longitude: 112.79997</p>
+		<p>Altitude: 100 m</p>
+		<p>Heading: 270 deg</p>
+		<p>Speed: 5 kt</p>
+		<p>Battery: </p>
+		<br><br>
+		<p>Nama Drone</p>
+		</div>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+            <script src="./Leaflet.draw vector editing handlers_files/leaflet-src.js.download"></script>
+    <link rel="stylesheet" href="./Leaflet.draw vector editing handlers_files/leaflet.css">
+
+    <script src="./Leaflet.draw vector editing handlers_files/Leaflet.draw.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Leaflet.Draw.Event.js.download"></script>
+    <link rel="stylesheet" href="./Leaflet.draw vector editing handlers_files/leaflet.draw.css">
+
+    <script src="./Leaflet.draw vector editing handlers_files/Toolbar.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Tooltip.js.download"></script>
+
+    <script src="./Leaflet.draw vector editing handlers_files/GeometryUtil.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/LatLngUtil.js.download"></script><style></style>
+    <script src="./Leaflet.draw vector editing handlers_files/LineUtil.Intersect.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Polygon.Intersect.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Polyline.Intersect.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/TouchEvents.js.download"></script>
+
+    <script src="./Leaflet.draw vector editing handlers_files/DrawToolbar.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Draw.Feature.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Draw.SimpleShape.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Draw.Polyline.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Draw.Marker.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Draw.Circle.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Draw.CircleMarker.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Draw.Polygon.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Draw.Rectangle.js.download"></script>
+
+
+    <script src="./Leaflet.draw vector editing handlers_files/EditToolbar.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/EditToolbar.Edit.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/EditToolbar.Delete.js.download"></script>
+
+    <script src="./Leaflet.draw vector editing handlers_files/Control.Draw.js.download"></script>
+
+    <script src="./Leaflet.draw vector editing handlers_files/Edit.Poly.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Edit.SimpleShape.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Edit.Rectangle.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Edit.Marker.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Edit.CircleMarker.js.download"></script>
+    <script src="./Leaflet.draw vector editing handlers_files/Edit.Circle.js.download"></script>
+        <script>
+        var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+            osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
+            map = new L.Map('map', { center: new L.LatLng(51.505, -0.04), zoom: 13 }),
+            drawnItems = L.featureGroup().addTo(map);
+    L.control.layers({
+        'osm': osm.addTo(map),
+        "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
+            attribution: 'google'
+        })
+    }, { 'drawlayer': drawnItems }, { position: 'topleft', collapsed: false }).addTo(map);
+    map.addControl(new L.Control.Draw({
+        edit: {
+            featureGroup: drawnItems,
+            poly: {
+                allowIntersection: false
+            }
+        },
+        draw: {
+            polygon: {
+                allowIntersection: false,
+                showArea: true
+            }
+        }
+    }));
+
+    map.on(L.Draw.Event.CREATED, function (event) {
+        var layer = event.layer;
+
+        drawnItems.addLayer(layer);
+    });
+        </script>
+    </body>
+</html>
