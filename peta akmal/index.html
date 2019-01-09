@@ -129,48 +129,48 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-            <script src="./Leaflet.draw vector editing handlers_files/leaflet-src.js.download"></script>
-    <link rel="stylesheet" href="./Leaflet.draw vector editing handlers_files/leaflet.css">
+        <script src="libs/leaflet-src.js"></script>
+    <link rel="stylesheet" href="libs/leaflet.css"/>
 
-    <script src="./Leaflet.draw vector editing handlers_files/Leaflet.draw.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Leaflet.Draw.Event.js.download"></script>
-    <link rel="stylesheet" href="./Leaflet.draw vector editing handlers_files/leaflet.draw.css">
+    <script src="../../src/Leaflet.draw.js"></script>
+    <script src="../../src/Leaflet.Draw.Event.js"></script>
+    <link rel="stylesheet" href="../../src/leaflet.draw.css"/>
 
-    <script src="./Leaflet.draw vector editing handlers_files/Toolbar.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Tooltip.js.download"></script>
+    <script src="../../src/Toolbar.js"></script>
+    <script src="../../src/Tooltip.js"></script>
 
-    <script src="./Leaflet.draw vector editing handlers_files/GeometryUtil.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/LatLngUtil.js.download"></script><style></style>
-    <script src="./Leaflet.draw vector editing handlers_files/LineUtil.Intersect.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Polygon.Intersect.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Polyline.Intersect.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/TouchEvents.js.download"></script>
+    <script src="../../src/ext/GeometryUtil.js"></script>
+    <script src="../../src/ext/LatLngUtil.js"></script>
+    <script src="../../src/ext/LineUtil.Intersect.js"></script>
+    <script src="../../src/ext/Polygon.Intersect.js"></script>
+    <script src="../../src/ext/Polyline.Intersect.js"></script>
+    <script src="../../src/ext/TouchEvents.js"></script>
 
-    <script src="./Leaflet.draw vector editing handlers_files/DrawToolbar.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Draw.Feature.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Draw.SimpleShape.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Draw.Polyline.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Draw.Marker.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Draw.Circle.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Draw.CircleMarker.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Draw.Polygon.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Draw.Rectangle.js.download"></script>
+    <script src="../../src/draw/DrawToolbar.js"></script>
+    <script src="../../src/draw/handler/Draw.Feature.js"></script>
+    <script src="../../src/draw/handler/Draw.SimpleShape.js"></script>
+    <script src="../../src/draw/handler/Draw.Polyline.js"></script>
+    <script src="../../src/draw/handler/Draw.Marker.js"></script>
+    <script src="../../src/draw/handler/Draw.Circle.js"></script>
+    <script src="../../src/draw/handler/Draw.CircleMarker.js"></script>
+    <script src="../../src/draw/handler/Draw.Polygon.js"></script>
+    <script src="../../src/draw/handler/Draw.Rectangle.js"></script>
 
 
-    <script src="./Leaflet.draw vector editing handlers_files/EditToolbar.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/EditToolbar.Edit.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/EditToolbar.Delete.js.download"></script>
+    <script src="../../src/edit/EditToolbar.js"></script>
+    <script src="../../src/edit/handler/EditToolbar.Edit.js"></script>
+    <script src="../../src/edit/handler/EditToolbar.Delete.js"></script>
 
-    <script src="./Leaflet.draw vector editing handlers_files/Control.Draw.js.download"></script>
+    <script src="../../src/Control.Draw.js"></script>
 
-    <script src="./Leaflet.draw vector editing handlers_files/Edit.Poly.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Edit.SimpleShape.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Edit.Rectangle.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Edit.Marker.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Edit.CircleMarker.js.download"></script>
-    <script src="./Leaflet.draw vector editing handlers_files/Edit.Circle.js.download"></script>
+    <script src="../../src/edit/handler/Edit.Poly.js"></script>
+    <script src="../../src/edit/handler/Edit.SimpleShape.js"></script>
+    <script src="../../src/edit/handler/Edit.Rectangle.js"></script>
+    <script src="../../src/edit/handler/Edit.Marker.js"></script>
+    <script src="../../src/edit/handler/Edit.CircleMarker.js"></script>
+    <script src="../../src/edit/handler/Edit.Circle.js"></script>
         <script>
-        var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+       var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
             map = new L.Map('map', { center: new L.LatLng(51.505, -0.04), zoom: 13 }),
