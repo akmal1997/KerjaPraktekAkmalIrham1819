@@ -1,7 +1,12 @@
 from dronekit import connect, VehicleMode, LocationGlobalRelative
+from dronekit_sitl import SITL
 import time
 import math
 
+sitl = SITL()
+sitl.download('copter', '3.3', verbose=True)
+sitl_args = ['-I0', '--model', 'quad', '--home=-6.26667,106.95468,0,180']
+sitl.launch(sitl_args, await_ready=True, restart=True)
 
 #Set up option parsing to get connection string
 import argparse  
@@ -71,25 +76,35 @@ print "Set default/target airspeed to 3"
 vehicle.airspeed = 9
 
 waypoint = []
-print "Going towards first point for 30 seconds ..."
 waypoint.append(LocationGlobalRelative(-6.266667, 106.955555, 20))
-targetDistance = get_distance_metres(vehicle.location.global_frame, waypoint[0])
-vehicle.simple_goto(waypoint[0])
+waypoint.append(LocationGlobalRelative(-6.2956779, 106.948596, 30))
 
-while vehicle.mode.name == "GUIDED":
-	remainingDistance = get_distance_metres(vehicle.location.global_frame, waypoint[0])
-	print "Distance to target: ", remainingDistance, "Location: ", vehicle.location.global_frame
-	if remainingDistance <= targetDistance * 0.01:
-		print "Reached Target"
-		break
-	time.sleep(3)
+print len(waypoint)
+for i in range (0,len(waypoint)-1):
+	print i
+	print "Going towards first point for 30 seconds ..."
+	targetDistance = get_distance_metres(vehicle.location.global_frame, waypoint[i])
+	vehicle.simple_goto(waypoint[i])
 
+	while vehicle.mode.name == "GUIDED":
+		remainingDistance = get_distance_metres(vehicle.location.global_frame, waypoint[i])
+		print "Distance to target: ", remainingDistance, "Location: ", vehicle.location.global_frame.lat, vehicle.location.global_frame.lon, "Altitude: ", vehicle.location.global_frame.alt
+		if remainingDistance <= targetDistance * 0.01:
+			print "Reached Target"
+			break
+		time.sleep(3)
+	continue
 
 #print "Going towards second point for 30 seconds (groundspeed set to 10 m/s) ..."
-#waypoint.append(LocationGlobalRelative(-6.2656779, 106.948596, 20))
 #vehicle.simple_goto(waypoint[1], groundspeed=10)
 
-#time.sleep(30)
+#while vehicle.mode.name == "GUIDED":
+#	remainingDistance = get_distance_metres(vehicle.location.global_frame, waypoint[1])
+#	print "Distance to target: ", remainingDistance, "Location: ", vehicle.location.global_frame.lat, vehicle.location.global_frame.lon, "Altitude: ", vehicle.location.global_frame.alt
+#	if remainingDistance <= targetDistance * 0.01:
+#		print "Reached Target"
+#		break
+#	time.sleep(3)
 
 #print "Going towards third point for 30 seconds (groundspeed set to 10 m/s) ..."
 #waypoint.append(LocationGlobalRelative(-6.2636779, 106.928596, 20))
