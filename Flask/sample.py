@@ -16,8 +16,14 @@ class GoToForm(FlaskForm):
     lon = FloatField('Longitude', validators=[DataRequired()])
     alt = FloatField('Altitude', validators=[DataRequired()])
     #remember_me = BooleanField('Remember Me')
-    submit = SubmitField('Sign In')
-	
+    submit = SubmitField('Go To!')
+
+class TakeoffForm(FlaskForm):
+    #global username
+    alti = FloatField('Altitude', validators=[DataRequired()])
+    #remember_me = BooleanField('Remember Me')
+    submit = SubmitField('Takeoff!')
+
 class Drone(object):
 	global vehicle
 	global sitl
@@ -55,7 +61,7 @@ class Drone(object):
 
 d = Drone()
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path = "/static", static_folder='E:\KP\KerjaPraktekAkmalIrham1819\Flask\templates\static')
 app.secret_key = 'my key'
 
 @app.route('/')
@@ -64,33 +70,39 @@ def main_menu():
 @app.route('/menu')
 def index():
 	return render_template("index.html", latitude=str(d.vehicle.location.global_relative_frame.lat), longitude=str(d.vehicle.location.global_relative_frame.lon), altitude=str(d.vehicle.location.global_relative_frame.alt), groundspeed=str(d.vehicle.groundspeed*3.6))
-
+#@app.route('/hehe')
+#def static_file():
+#	return app.send_static_file('index.html')
 @app.route('/connect')
 def konek_aksi():
 	d.connect()
 	connect=1
 	print ("Connected")
 	return render_template("connect_sukses.html")
-	
+
 @app.route('/disconnect')
 def diskonek():
 	d.disconnect()
 	return "OK, disconnected"
+@app.route('/takeoff', methods = ['GET', 'POST'])
+def takeoff():
+	form2=TakeoffForm()
+	if form2.validate_on_submit():
+		altitude = form2.alti.data
+		d.takeoff(altitude)
+		while True:
+			#return str(d.vehicle.location.global_relative_frame.alt)
+			return render_template("takeoff_sukses.html")
+			if d.vehicle.location.global_relative_frame.alt >= alt*0.95:
+				return "Reached target altitude"
+				break
+		#print altitude
+	return render_template('takeoff.html', form=form2)
 
 @app.route('/track')
 def track():
     return str(d.vehicle.location.global_relative_frame)
 	
-@app.route('/takeoff')
-def take_off():
-	alt = 2
-	d.takeoff(alt)
-	while True:
-		#return str(d.vehicle.location.global_relative_frame.alt)
-		return render_template("takeoff_sukses.html")
-		if d.vehicle.location.global_relative_frame.alt >= alt*0.95:
-			return "Reached target altitude"
-			break
 
 @app.route('/goto', methods = ['GET', 'POST'])
 def goto():
@@ -106,7 +118,7 @@ def goto():
         d.goto(point)
         return redirect('/menu')
         #return redirect('/index')
-    return render_template('goto.html', title='Sign In', form=form)
+    return render_template('goto.html', form=form)
 	#lat=float(-35.3692605)
 	#lon=float(149.1612287)
 	#alt=float(20)
