@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
   
-      <link rel="stylesheet" href="css/style.css">
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
   
 </head>
@@ -34,7 +34,7 @@
 
 <nav id="main-nav">
 	<ul>
-		<li><a href="index.html"><span>Mulai Drone Monitoring</span></a></li>
+		<li><a href="/connect"><span>Mulai Drone Monitoring</span></a></li>
 		<li><a href="carapakai.html"><span>Cara Pakai</span></a></li>
 		<li><a href="aboutus.html"><span>Tentang Kami</span></a></li>
 	</ul>
@@ -45,7 +45,7 @@
 
   
 
-    <script  src="js/index.js"></script>
+    <script  src="{{ url_for('static', filename='js/index.js') }}"></script>
 
 
 

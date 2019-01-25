@@ -146,10 +146,15 @@ width = 100%
 <div id="map" style="position: absolute; width: 1100px; height: 600px; left: 260px; top: 70px; right: 100px; border: 1px solid #ccc"></div>
 
 <script>
-    var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+	function myFunc(vars) {
+		return vars
+	}
+    var lat = myFunc({{latitude|tojson}})
+	var longi = myFunc({{longitude|tojson}})
+	var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
-            map = new L.Map('map', { center: new L.LatLng(51.505, -0.04), zoom: 13 }),
+            map = new L.Map('map', { center: new L.LatLng(lat, longi), zoom: 13 }),
             drawnItems = L.featureGroup().addTo(map);
     L.control.layers({
         'osm': osm.addTo(map),

@@ -15,6 +15,7 @@ class GoToForm(FlaskForm):
     lat = FloatField('Latitude', validators=[DataRequired()])
     lon = FloatField('Longitude', validators=[DataRequired()])
     alt = FloatField('Altitude', validators=[DataRequired()])
+    gspeed = FloatField('Ground Speed (type -1 if you want to null)')
     #remember_me = BooleanField('Remember Me')
     submit = SubmitField('Go To!')
 
@@ -44,8 +45,11 @@ class Drone(object):
 			time.sleep(1)
 		self.vehicle.simple_takeoff(altitude)
 	
-	def goto (self, coord):
-		self.vehicle.simple_goto(coord)
+	def goto (self, coord, speed):
+		if speed == -1:
+			self.vehicle.simple_goto(coord)
+		else:
+			self.vehicle.simple_goto(coord, groundspeed=speed)
 	
 	def land(self):
 		self.vehicle.mode = VehicleMode("LAND")
@@ -70,6 +74,7 @@ def main_menu():
 @app.route('/menu')
 def index():
 	return render_template("index.html", latitude=str(d.vehicle.location.global_relative_frame.lat), longitude=str(d.vehicle.location.global_relative_frame.lon), altitude=str(d.vehicle.location.global_relative_frame.alt), groundspeed=str(d.vehicle.groundspeed*3.6))
+	#return render_template('index.html', latitude=7.25, longitude=2.43, altitude=100, groundspeed=45)
 #@app.route('/hehe')
 #def static_file():
 #	return app.send_static_file('index.html')
@@ -111,11 +116,13 @@ def goto():
         lat = form.lat.data
         lon = form.lon.data
         alt = form.alt.data
+        gs = form.gspeed.data
         #print (lat)
         #print (lon)
         #print (alt)
+        #print (gs)
         point = LocationGlobalRelative(lat, lon, alt)
-        d.goto(point)
+        d.goto(point, gs)
         return redirect('/menu')
         #return redirect('/index')
     return render_template('goto.html', form=form)
