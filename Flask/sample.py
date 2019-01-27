@@ -10,6 +10,14 @@ import argparse
 vehicle = 0
 sitl = 0
 connected = 0
+waypoint = []
+groundspeed = []
+
+class connectform (FlaskForm):
+	lat = FloatField('Latitude', validators=[DataRequired()])
+	lon = FloatField('Longitude', validators=[DataRequired()])
+	submit = SubmitField('Connect!')
+
 class GoToForm(FlaskForm):
     #global username
     lat = FloatField('Latitude', validators=[DataRequired()])
@@ -17,6 +25,7 @@ class GoToForm(FlaskForm):
     alt = FloatField('Altitude', validators=[DataRequired()])
     gspeed = FloatField('Ground Speed (type -1 if you want to null)')
     #remember_me = BooleanField('Remember Me')
+    #new_wp = SubmitField('New Waypoint!')
     submit = SubmitField('Go To!')
 
 class TakeoffForm(FlaskForm):
@@ -28,9 +37,14 @@ class TakeoffForm(FlaskForm):
 class Drone(object):
 	global vehicle
 	global sitl
-	def connect(self):
-		sitl = dronekit_sitl.start_default()
-		connection_string = sitl.connection_string()
+	def connect(self, latitude, longitude):
+		self.sitl = dronekit_sitl.start_default()
+		a = str(latitude)
+		b = str(longitude)
+		sitl_args = ['-I0', '--model', 'quad']
+		sitl_args.append('--home=' + a + ',' + b + ',0,180')
+		self.sitl.launch(sitl_args, await_ready=True, restart=True)
+		connection_string = self.sitl.connection_string()
 		self.vehicle = connect(connection_string, wait_ready=True)
 		
 	def takeoff (self, altitude):
@@ -60,12 +74,13 @@ class Drone(object):
 		self.vehicle.close()
 
 	# Shut down simulator if it was started.
-		if sitl is not None:
-			sitl.stop()
+		if self.sitl is not None:
+			self.sitl.stop()
 
 d = Drone()
 
-app = Flask(__name__, static_url_path = "/static", static_folder='E:\KP\KerjaPraktekAkmalIrham1819\Flask\templates\static')
+app = Flask(__name__)
+app.static_folder = 'static'
 app.secret_key = 'my key'
 
 @app.route('/')
@@ -78,17 +93,23 @@ def index():
 #@app.route('/hehe')
 #def static_file():
 #	return app.send_static_file('index.html')
-@app.route('/connect')
+@app.route('/connect', methods = ['GET', 'POST'])
 def konek_aksi():
-	d.connect()
-	connect=1
-	print ("Connected")
-	return render_template("connect_sukses.html")
+	forms = connectform()
+	if forms.validate_on_submit():
+		la = forms.lat.data
+		lo = forms.lon.data
+		d.connect(la, lo)
+		connect=1
+		print ("Connected! Set home location:" + str(la) + ',' + str(lo))
+		return render_template("connect_sukses.html")
+	return render_template('connect.html', form=forms)
 
 @app.route('/disconnect')
 def diskonek():
 	d.disconnect()
-	return "OK, disconnected"
+	return redirect('/')
+
 @app.route('/takeoff', methods = ['GET', 'POST'])
 def takeoff():
 	form2=TakeoffForm()
@@ -108,30 +129,27 @@ def takeoff():
 def track():
     return str(d.vehicle.location.global_relative_frame)
 	
-
+#@app.route('/goto_addwp')
+#def add_waypoint():
+	
 @app.route('/goto', methods = ['GET', 'POST'])
 def goto():
     form = GoToForm()
+	#if form.
     if form.validate_on_submit():
         lat = form.lat.data
         lon = form.lon.data
         alt = form.alt.data
         gs = form.gspeed.data
-        #print (lat)
-        #print (lon)
-        #print (alt)
-        #print (gs)
+        print (lat)
+        print (lon)
+        print (alt)
+        print (gs)
         point = LocationGlobalRelative(lat, lon, alt)
         d.goto(point, gs)
         return redirect('/menu')
         #return redirect('/index')
     return render_template('goto.html', form=form)
-	#lat=float(-35.3692605)
-	#lon=float(149.1612287)
-	#alt=float(20)
-	#point = LocationGlobalRelative(lat, lon, alt)
-	#d.goto(point)
-	#return str(point)
 
 @app.route('/land')
 def landing():

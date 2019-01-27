@@ -127,6 +127,7 @@ width = 100%
         <a href="http://127.0.0.1:5000/takeoff">Takeoff</a>
         <a href="http://127.0.0.1:5000/goto">Go To</a>
 		<a href="http://127.0.0.1:5000/land">Landing</a>
+		<a href="/disconnect">Disconnect</a>
         <div class="topnav-right">
         <a href="#">Nama Drone</a>
         </div>
@@ -149,9 +150,10 @@ width = 100%
 	function myFunc(vars) {
 		return vars
 	}
-    var lat = myFunc({{latitude|tojson}})
-	var longi = myFunc({{longitude|tojson}})
-	var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    var lat = myFunc({{latitude}})
+	var longi = myFunc({{longitude}})
+	
+    var osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
             map = new L.Map('map', { center: new L.LatLng(lat, longi), zoom: 13 }),
@@ -176,7 +178,14 @@ width = 100%
             }
         }
     }));
-
+	
+	var waypoint_polyline = [];
+	var polyline;
+	/*while (true) {
+		waypoint_polyline.push([lat, longi]);
+		polyline = L.polyline(waypoint_polyline).addTo(map);
+	}*/
+	
     map.on(L.Draw.Event.CREATED, function (event) {
         var layer = event.layer;
 
