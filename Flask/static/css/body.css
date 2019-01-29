@@ -1,0 +1,38 @@
+body {
+background-image: url("backgroundformulir.jpg");
+background-size: cover;
+font-family: tahoma;
+}
+h2 {
+color: aqua;
+text-shadow: 3px 2px black;
+}
+.login {
+padding: 1em;
+margin: 2em auto;
+width: 17em;
+background: lightblue;
+border-radius: 3px;
+}
+label {
+font-size: 10pt;
+color: #555;
+font-family: Trebuchet MS;
+}
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+padding: 8px;
+width: 95%;
+background: #efefef;
+border: 0;
+font-size: 10pt;
+margin: 6px 0px;
+}
+.tombol {
+background: #3498db;
+color: #fff;
+border: 0;
+padding: 5px 8px;
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PENDAFTARAN ANGGOTA SAHABAT KERETA WITH SPOJ.COM</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/body.css') }}">
+</head>
+<body>
+	<center><h2>PENDAFTARAN ANGGOTA SAHABAT KERETA WITH SPOJ.COM</h2></center>
+	<div class="login">
+		<form action="#" method="POST" onSubmit="validasi()">
+			<div>
+				<label>Nama Lengkap:</label>
+				<input type="text" name="nama" id="nama" />
+			</div>
+			<div>
+				<label>Email:</label>
+				<input type="email" name="email" id="email" />
+			</div>
+			<div>
+				<label>Alamat:</label>
+				<textarea cols="40" rows="5" name="alamat" id="alamat"></textarea>
+			</div>
+			<div>
+				<div>
+					<label>Link jumlah submission SPOJ.COM:</label>
+					<input type="text" name="website" id="website" />
+				</div>
+				<div>
+					<label>Nomor HP</label>
+					<input type="text" name="nomorhp" id="nomorhp" oninput="cekhp()"/>
+					<div id=hpalert></div>
+				</div>
+				<div>
+					<label>Username Forum SKOJ</label>
+					<input type="text" name="username" id="username" />
+				</div>
+				<div>
+					<label>Password</label>
+					<input type="password" name="password" id="password" />
+				</div>
+				<div>
+					<label>ID LINE</label>
+					<input type="text" name="idline" id="idline" />
+				</div>
+				<div>
+					<input type="submit" value="Daftar" class="tombol">
+				</div>
+			</form>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function validasi() {
+			var nama = document.getElementById("nama").value;
+			var email = document.getElementById("email").value;
+			var alamat = document.getElementById("alamat").value;
+			var website = document.getElementById("website").value;
+			var nomorhp = document.getElementById("nomorhp").value;
+			var username = document.getElementById("username").value;
+			var password = document.getElementById("password").value;
+			if (nama != "" && email!="" && alamat !="" && website !="" && nomorhp !="" && username !="" && password !="") {
+				return true;
+			}else{
+				alert('Anda harus mengisi data dengan lengkap !');
+			}
+		}
+		function cekhp(){
+			var nohp = document.getElementById("nomorhp").value;
+			var regexhp = new RegExp ("^([0-9]{10,16})");
+			if (regexhp.test(nohp)){
+				document.getElementById("hpalert").innerHTML="";
+			}
+			else document.getElementById("hpalert").innerHTML="Nomor HP invalid";
+		}
+	</script>
+	</html>
+
