@@ -137,7 +137,7 @@ width = 100%
         <p>Latitude: {{latitude}}</p>
         <p>Longitude: {{longitude}}</p>
         <p>Altitude: {{altitude}} m</p>
-        <p>Heading: 270 deg</p>
+        <p>Heading: {{head}}</p>
         <p>Speed: {{groundspeed}} kmh</p>
         <p>Battery: </p>
 		<p> Go to waypoint {{way}}</p>
@@ -160,6 +160,7 @@ width = 100%
             drawnItems = L.featureGroup().addTo(map);
 			var marker;
 			marker = L.marker([lat, longi]).addTo(map);
+			
     L.control.layers({
         'osm': osm.addTo(map),
         "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
