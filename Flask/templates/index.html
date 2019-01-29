@@ -120,16 +120,15 @@ width = 100%
 </head>
 <body>
             <div class="topnav">
-        <a href="menu.html">Halaman Utama</a>
-        <a class="active" href="#drone">Drone</a>
-        <a href="#waypoint">Waypoint</a>
-		<a href="http://127.0.0.1:5000/home">Set Home Location</a>
+        <a href="/">Halaman Utama</a>
+        <a class="active" href="#drone">Monitoring</a>
+        <a href="/waypoint">Add New Waypoint</a>
         <a href="http://127.0.0.1:5000/takeoff">Takeoff</a>
         <a href="http://127.0.0.1:5000/goto">Go To</a>
 		<a href="http://127.0.0.1:5000/land">Landing</a>
-		<a href="/disconnect">Disconnect</a>
+		<a href="/clearwp">Clear Waypoints</a>
         <div class="topnav-right">
-        <a href="#">Nama Drone</a>
+        <a href="/disconnect">Disconnect</a>
         </div>
         </div>
         <div class="vertical-menu">
@@ -141,8 +140,9 @@ width = 100%
         <p>Heading: 270 deg</p>
         <p>Speed: {{groundspeed}} kmh</p>
         <p>Battery: </p>
+		<p> Go to waypoint {{way}}</p>
         <br><br>
-        <p>Nama Drone</p>
+        <a href="/disconnect">Disconnect</a>
         </div>
 <div id="map" style="position: absolute; width: 1100px; height: 600px; left: 260px; top: 70px; right: 100px; border: 1px solid #ccc"></div>
 
