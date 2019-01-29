@@ -158,6 +158,8 @@ width = 100%
             osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
             map = new L.Map('map', { center: new L.LatLng(lat, longi), zoom: 13 }),
             drawnItems = L.featureGroup().addTo(map);
+			var marker;
+			marker = L.marker([lat, longi]).addTo(map);
     L.control.layers({
         'osm': osm.addTo(map),
         "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
