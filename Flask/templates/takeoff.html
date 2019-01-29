@@ -1,8 +1,20 @@
-{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Take Off</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/body.css') }}">
+</head>
+<body>
+
+    <h1>Drone Take Off</h1>
+    <div class="login">
     <h1>Go To Form</h1>
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>{{ form.alti.label }} <br> {{ form.alti }}</p>
         <p>{{ form.submit() }}</p>
     </form>
-{% endblock %}
+	</body>
+	</html>
+
+

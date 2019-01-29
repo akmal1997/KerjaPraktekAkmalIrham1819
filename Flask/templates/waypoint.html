@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>PENDAFTARAN ANGGOTA SAHABAT KERETA WITH SPOJ.COM</title>
+	<title>Waypoint</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/body.css') }}">
 </head>
 <body>
@@ -16,14 +16,9 @@
 		<p>{{ form.gspeed.label }} <br> {{ form.gspeed }}</p>
         <p>{{form.submit()}} </p>
     </form>
-
+    <button onclick="window.location.href='/menu'" class="tombol">Main Menu</button>
+    <button onclick="window.location.href='/goto'" class="tombol">Goto</button>
 	</body>
 	</html>
-=======
-	<a href="/menu">Or go to main menu</a>
-    <button onclick="window.location.href='/menu'" class="tombol">Main Menu</button>
-    <button onclick="window.location.href='/goto'" class="tombol">Main Menu</button>
-	<a href="/goto">Go to instead...</a>
 
-    //disabled
 
