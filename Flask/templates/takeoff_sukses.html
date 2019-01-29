@@ -2,9 +2,13 @@
 <html>
 <head>
 	<title>Takeoff Berhasil</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/body.css') }}">
 </head>
 <body>
-	<h2>Takeoff Berhasil</h2>
-	<p>Kembali ke <a href="http://127.0.0.1:5000/menu">halaman monitoring</a></p>
+    <div class="login">
+    <form action="" method="post" novalidate>
+        <center><h2>Takeoff Berhasil</h2></center>
+        <center><button onclick="window.location.href='http://127.0.0.1:5000/menu'" class="tombol">Kembali ke halaman monitoring</button></center>
+    </form>
 </body>
 </html>
