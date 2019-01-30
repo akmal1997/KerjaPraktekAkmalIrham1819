@@ -119,6 +119,7 @@ width = 100%
     <script src="{{ url_for('static', filename='src/edit/handler/Edit.Marker.js') }}"></script>
     <script src="{{ url_for('static', filename='src/edit/handler/Edit.CircleMarker.js') }}"></script>
     <script src="{{ url_for('static', filename='src/edit/handler/Edit.Circle.js') }}"></script>
+    <script src="/static/socket.io.min.js"></script>
 </head>
 <body>
             <div class="topnav">
@@ -139,11 +140,20 @@ width = 100%
         <p>Latitude: {{latitude}}</p>
         <p>Longitude: {{longitude}}</p>
         <p>Altitude: {{altitude}} m</p>
-        <p>Heading: 270 deg</p>
+        <p>Heading: {{head}}</p>
         <p>Speed: {{groundspeed}} kmh</p>
         <p>Battery: </p>
 		<p> Go to waypoint {{way}}</p>
         <br><br>
+        <script type="text/javascript">
+          var socket = io.connect('//' + document.domain + ':' + location.port);
+          socket.on('connect', function(){
+            socket.on('location', function (arg){
+              $('h1').text('Current drone location:')
+              $('pre').text(JSON.stringify(arg, null, '  '));
+            })
+          })
+        </script>
         <a href="/disconnect">Disconnect</a>
         </div>
 <div id="map" style="position: absolute; width: 1100px; height: 600px; left: 260px; top: 70px; right: 100px; border: 1px solid #ccc"></div>
@@ -160,6 +170,9 @@ width = 100%
             osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib }),
             map = new L.Map('map', { center: new L.LatLng(lat, longi), zoom: 13 }),
             drawnItems = L.featureGroup().addTo(map);
+			var marker;
+			marker = L.marker([lat, longi]).addTo(map);
+			
     L.control.layers({
         'osm': osm.addTo(map),
         "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {

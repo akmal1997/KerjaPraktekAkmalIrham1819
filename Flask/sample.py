@@ -7,6 +7,8 @@ import time
 import dronekit_sitl
 import argparse
 import math
+import socket
+from flask_socketio import SocketIO
 
 vehicle = 0
 sitl = 0
@@ -14,6 +16,15 @@ connected = 0
 temp = 0
 waypoint = []
 groundspeed = []
+
+# Allow us to reuse sockets after the are bound.
+# http://stackoverflow.com/questions/25535975/release-python-flask-port-when-script-is-terminated
+socket.socket._bind = socket.socket.bind
+def my_socket_bind(self, *args, **kwargs):
+    self.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    return socket.socket._bind(self, *args, **kwargs)
+socket.socket.bind = my_socket_bind
+# okay, now that that's done...
 
 class connectform (FlaskForm):
 	lat = FloatField('Latitude', validators=[DataRequired()])
@@ -99,6 +110,7 @@ d = Drone()
 app = Flask(__name__)
 app.static_folder = 'static'
 app.secret_key = 'my key'
+socketio = SocketIO(app)
 
 @app.route('/')
 def main_menu():
@@ -193,8 +205,20 @@ def goto():
 	
 @app.route('/menu')
 def index():
-	return render_template("index.html", latitude=str(d.vehicle.location.global_relative_frame.lat), longitude=str(d.vehicle.location.global_relative_frame.lon), altitude=str(d.vehicle.location.global_relative_frame.alt), groundspeed=str(d.vehicle.groundspeed*3.6), way = str(temp))
+	return render_template("index.html", latitude=str(d.vehicle.location.global_relative_frame.lat), longitude=str(d.vehicle.location.global_relative_frame.lon), altitude=str(d.vehicle.location.global_relative_frame.alt), groundspeed=str(d.vehicle.groundspeed*3.6), way = str(temp), head=str(d.vehicle.heading))
 	#return render_template('index.html', latitude=7.25, longitude=2.43, altitude=100, groundspeed=45)
+def latlog():
+	while True:
+		time.sleep(.5)
+		loc=d.vehicle.location.global_frame
+		if loc:
+			socketio.emit('location', {
+					"altitude": loc.alt,
+					"longitude": loc.lon,
+					"latitude": loc.lat
+				})
+		else:
+			socket.emit('location', None)
 @app.route('/clearwp')
 def clearwp():
 	#d.disconnect()
@@ -208,3 +232,4 @@ def landing():
 	
 if __name__ == "__main__":
 	app.run(host='127.0.0.1', port=5000, threaded=True)
+	socketio.run(app, port=5000)
