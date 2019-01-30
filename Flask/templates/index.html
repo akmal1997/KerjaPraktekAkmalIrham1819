@@ -145,15 +145,6 @@ width = 100%
         <p>Battery: </p>
 		<p> Go to waypoint {{way}}</p>
         <br><br>
-        <script type="text/javascript">
-          var socket = io.connect('//' + document.domain + ':' + location.port);
-          socket.on('connect', function(){
-            socket.on('location', function (arg){
-              $('h1').text('Current drone location:')
-              $('pre').text(JSON.stringify(arg, null, '  '));
-            })
-          })
-        </script>
         <a href="/disconnect">Disconnect</a>
         </div>
 <div id="map" style="position: absolute; width: 1100px; height: 600px; left: 260px; top: 70px; right: 100px; border: 1px solid #ccc"></div>
