@@ -21,18 +21,22 @@
 	<p>List of Waypoints</p>
 	<table border=1>
 		<tr>
+			<th>No</th>
 			<th>Latitude</th>
 			<th>Longitude</th>
 			<th>Altitude</th>
 		</tr>
 		{% for i in range(0,result|length) %}
 		<tr>
+			<td> {{i+1}} </td>
 			<td> {{result[i].lat}}</td>
 			<td> {{result[i].lon}}</td>
 			<td> {{result[i].alt}}</td> 
 		</tr>
 		{% endfor %}
 	</table>
+	<br>
+	<br>
 	<table border=1>
 		<tr>
 			<th>Ground Speed</th>
