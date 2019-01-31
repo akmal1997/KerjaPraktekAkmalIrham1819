@@ -18,6 +18,26 @@
     </form>
     <button onclick="window.location.href='/menu'" class="tombol">Main Menu</button>
     <button onclick="window.location.href='/goto'" class="tombol">Goto</button>
+	<p>List of Waypoints</p>
+	<table border=1>
+		<tr>
+			<th>Latitude</th>
+			<th>Longitude</th>
+			<th>Altitude</th>
+			<th>Ground Speed</th>
+		</tr>
+		{% for i in range(0,result|length) %}
+		<tr>
+			<td> {{result[i].lat}}</td>
+			<td> {{result[i].lon}}</td>
+			<td> {{result[i].alt}}</td>
+			{% for j in range(0,res|length) %}
+			<td> {{res[j]}} </td>
+			{% continue %}
+			{% endfor %}
+		</tr>
+		{% endfor %}
+	</table>
 	</body>
 	</html>
 

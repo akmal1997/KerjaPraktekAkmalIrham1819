@@ -7,8 +7,6 @@ import time
 import dronekit_sitl
 import argparse
 import math
-#import socket
-#from flask_socketio import SocketIO
 
 vehicle = 0
 sitl = 0
@@ -17,6 +15,7 @@ temp = 0
 fly = 0
 waypoint = []
 groundspeed = []
+wp = []
 
 class connectform (FlaskForm):
 	lat = FloatField('Latitude', validators=[DataRequired()])
@@ -102,6 +101,7 @@ d = Drone()
 app = Flask(__name__)
 app.static_folder = 'static'
 app.secret_key = 'my key'
+app.jinja_env.add_extension('jinja2.ext.loopcontrols')
 #socketio = SocketIO(app)
 
 @app.route('/carapakai')
@@ -132,10 +132,11 @@ def konek_aksi():
 
 @app.route('/disconnect')
 def diskonek():
-	global connected
+	global connected, fly
 	clearwayp()
 	d.disconnect()
 	connected = 0
+	fly = 0
 	print connected
 	return redirect('/')
 
@@ -175,13 +176,14 @@ def waypoints():
         print (gs)
         waypoint.append(LocationGlobalRelative(lat, lon, alt))
         groundspeed.append(gs)
+		#wp.append()
         for i in range(0,len(waypoint)):
 		    print 'Waypoint #', i,':',waypoint[i].lat, waypoint[i].lon, waypoint[i].alt, groundspeed[i]
         #point = LocationGlobalRelative(lat, lon, alt)
         #d.goto(point, gs)
         #return redirect('/menu')
         #return redirect('/index')
-    return render_template('waypoint.html', form=form)
+    return render_template('waypoint.html', form=form, result=waypoint, res=groundspeed)
 	
 @app.route('/goto')
 def goto():
