@@ -45,7 +45,6 @@
 <style>
 .vertical-menu {
   width: 30%;
-  background-color: #87CEFA;
 }
 
 .vertical-menu a {
@@ -80,6 +79,8 @@ width = 100%
 </style>
 
     <title>Drone Controller</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}"/>
 
     <script src="{{ url_for('static', filename='libs/leaflet-src.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='libs/leaflet.css') }}"/>
