@@ -140,7 +140,7 @@ width = 100%
         </div>
         </div>
 
-        <div class="vertical-menu">
+        <div class="vertical-menu" style="position: absolute; width: 700px; height: 800px; left: 10px; top: 70px; right: 100px; border: 1px solid #ccc">
         <p>Drone Telemetry Data</p>
         <br>
         <p>Latitude: {{latitude}}</p>
@@ -153,7 +153,7 @@ width = 100%
         <br><br>
         </div>
 
-<div id="map" style="position: absolute; width: 1100px; height: 600px; left: 260px; top: 70px; right: 100px; border: 1px solid #ccc"></div>
+<div id="map" style="position: absolute; width: 1550px; height: 800px; left: 260px; top: 70px; right: 100px; border: 1px solid #ccc"></div>
 
 <script>
 	function myFunc(vars) {
@@ -170,10 +170,9 @@ width = 100%
 			var marker;
 			marker = L.marker([lat, longi]).addTo(map);
 
-	var latlng = []
+	var latlng = [[lat, longi]]
 	window.onload = function () {
-		{% for i in range(0,wp|length) %}
-		latlng.push([{{wp[i].lat}}, {{wp[i].lon}}])
+		latlng.push([lat, longi])
 		console.log(latlng)
 	};
 	
