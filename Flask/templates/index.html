@@ -123,6 +123,7 @@ width = 100%
     <script src="{{ url_for('static', filename='src/edit/handler/Edit.CircleMarker.js') }}"></script>
     <script src="{{ url_for('static', filename='src/edit/handler/Edit.Circle.js') }}"></script>
     <script src="/static/socket.io.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
 </head>
 <body>
         <div class="topnav">
@@ -168,9 +169,9 @@ width = 100%
             drawnItems = L.featureGroup().addTo(map);
 			var marker;
 			marker = L.marker([lat, longi]).addTo(map);
-	var latlng = [[lat, longi], [-6.2555,106.888]]
-	var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);
 			
+	var latlng = [[lat, longi]]
+	var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);		
     L.control.layers({
         'osm': osm.addTo(map),
         "google": L.tileLayer('http://www.google.cn/maps/vt?lyrs=s@189&gl=cn&x={x}&y={y}&z={z}', {
