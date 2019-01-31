@@ -169,9 +169,7 @@ width = 100%
             drawnItems = L.featureGroup().addTo(map);
 			var marker;
 			marker = L.marker([lat, longi]).addTo(map);
-	($document).ready(function({
-		console.log("Hello World");
-	});
+
 	var latlng = [[lat, longi]]
 	var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);		
     L.control.layers({
