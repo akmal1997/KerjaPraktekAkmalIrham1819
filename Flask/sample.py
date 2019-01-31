@@ -217,7 +217,7 @@ def index():
 def clearwp():
 	global fly
 	if fly == 1:
-		return redirect('/menu')
+		return render_template("clearwperror.html")
 	#d.disconnect()
 	else:
 		clearwayp()
