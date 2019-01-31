@@ -45,11 +45,10 @@
 <style>
 .vertical-menu {
   width: 30%;
-  
+  background-color: #87CEFA;
 }
 
 .vertical-menu a {
-  background-color: #87CEFA;
   color: black;
   display: block;
   padding: 12px;
@@ -125,18 +124,19 @@ width = 100%
     <script src="/static/socket.io.min.js"></script>
 </head>
 <body>
-            <div class="topnav">
+        <div class="topnav">
         <a href="/">Halaman Utama</a>
         <a class="active" href="#drone">Monitoring</a>
         <a href="/waypoint">Add New Waypoint</a>
         <a href="http://127.0.0.1:5000/takeoff">Takeoff</a>
         <a href="http://127.0.0.1:5000/goto">Go To</a>
-		<a href="http://127.0.0.1:5000/land">Landing</a>
-		<a href="/clearwp">Clear Waypoints</a>
+		    <a href="http://127.0.0.1:5000/land">Landing</a>
+		    <a href="/clearwp">Clear Waypoints</a>
         <div class="topnav-right">
         <a href="/disconnect">Disconnect</a>
         </div>
         </div>
+
         <div class="vertical-menu">
         <p>Drone Telemetry Data</p>
         <br>
@@ -146,10 +146,11 @@ width = 100%
         <p>Heading: {{head}}</p>
         <p>Speed: {{groundspeed}} kmh</p>
         <p>Battery: </p>
-		<p> Go to waypoint {{way}}</p>
+		    <p> Go to waypoint {{way}}</p>
         <br><br>
         <button onclick="window.location.href='/disconnect'" class="tombol">Disconnect</button>
         </div>
+
 <div id="map" style="position: absolute; width: 1100px; height: 600px; left: 260px; top: 70px; right: 100px; border: 1px solid #ccc"></div>
 
 <script>
