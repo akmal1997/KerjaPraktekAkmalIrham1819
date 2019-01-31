@@ -1,98 +1,12 @@
 <!DOCTYPE html>
 <html>
-<style>
-.topnav {
-    background-color: #333;
-    overflow: hidden;
-}
-
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  font-family: tahoma;
-}
-
-.topnav p {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 14px;
-  font-family: tahoma;
-}
-
-.topnav a:hover {
-  background-color: #ADD8E6;
-  color: black;
-}
-
-.topnav a.active {
-  background-color: #1E90FF;
-  color: white;
-}
-
-.topnav-right {
-  float: right;
-}
-</style>
-<style>
-.vertical-menu {
-  width: 30%;
-  
-}
-
-.vertical-menu a {
-  background-color: #eee;
-  color: black;
-  display: block;
-  padding: 12px;
-  text-decoration: none;
-  font-family: tahoma;
-}
-
-.vertical-menu a:hover {
-  background-color: #ccc;
-}
-
-.vertical-menu a.active {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.vertical-menu p {
-    color: blue;
-    font-size: 14pt;
-    font-family: tahoma;
-    
-}
-</style>
-
 <head>
 	<title>Take Off</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/body.css') }}">
 </head>
 <body>
 
-        <div class="topnav">
-        <a href="/">Halaman Utama</a>
-        <a class="active" href="#drone">Monitoring</a>
-        <a href="/waypoint">Add New Waypoint</a>
-        <a href="/takeoff">Takeoff</a>
-        <a href="/goto">Go To</a>
-            <a href="/land">Landing</a>
-            <a href="/clearwp">Clear Waypoints</a>
-        <div class="topnav-right">
-        <a href="/disconnect">Disconnect</a>
-        </div>
-
-    <div class="login">   
     <center><h2>Drone Takeoff</h2></center>
-    </div>
     <div class="login">
     <center><h2>Go To Form</h2></center>
     <form action="" method="post" novalidate>
@@ -100,7 +14,6 @@
         <p>{{ form.alti.label }} <br> {{ form.alti }}</p>
         <p>{{ form.submit() }}</p>
     </form>
-    </div>
 	</body>
 	</html>
 
