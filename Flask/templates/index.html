@@ -172,7 +172,10 @@ width = 100%
 
 	var latlng = [[lat, longi]]
 	window.onload = function () {
-		latlng.push([lat, longi])
+		{% for i in range(0,wp|length) %}
+		latlng.push([{{wp[i].lat}}, {{wp[i].lon}}])
+		{% endfor %}
+		var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);
 		console.log(latlng)
 	};
 	
