@@ -13,6 +13,8 @@ sitl = 0
 connected = 0
 temp = 0
 fly = 0
+la = 0
+lo = 0
 waypoint = []
 groundspeed = []
 wp = []
@@ -115,7 +117,7 @@ def about_us():
 	return render_template("aboutus.html")
 @app.route('/connect', methods = ['GET', 'POST'])
 def konek_aksi():
-	global connected
+	global connected, la, lo
 	if connected == 1:
 		return redirect('/menu')
 	else:
@@ -209,7 +211,7 @@ def goto():
 def index():
 	for i in range(len(waypoint)):
 		print waypoint[i]
-	return render_template("index.html", latitude=str(d.vehicle.location.global_relative_frame.lat), longitude=str(d.vehicle.location.global_relative_frame.lon), altitude=str(d.vehicle.location.global_relative_frame.alt), groundspeed=str(d.vehicle.groundspeed*3.6), way = str(temp), head=str(d.vehicle.heading), wp=waypoint)
+	return render_template("index.html", latitude=str(d.vehicle.location.global_relative_frame.lat), longitude=str(d.vehicle.location.global_relative_frame.lon), altitude=str(d.vehicle.location.global_relative_frame.alt), groundspeed=str(d.vehicle.groundspeed*3.6), way = str(temp), head=str(d.vehicle.heading), wp=waypoint, las=la, los=lo)
 	#return render_template('index.html', latitude=7.25, longitude=2.43, altitude=100, groundspeed=45)
 @app.route('/clearwp')
 def clearwp():
