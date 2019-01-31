@@ -171,9 +171,11 @@ width = 100%
 			marker = L.marker([lat, longi]).addTo(map);
 
 	var latlng = [[{{las}}, {{los}}]]
+	var mark = L.marker(latlng).addTo(mymap);
 	window.onload = function () {
 		{% for i in range(0,wp|length) %}
 		latlng.push([{{wp[i].lat}}, {{wp[i].lon}}])
+		mark = L.marker(latlng).addTo(mymap);
 		{% endfor %}
 		var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);
 		console.log(latlng)
