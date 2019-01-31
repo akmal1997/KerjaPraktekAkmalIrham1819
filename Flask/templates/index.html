@@ -168,6 +168,8 @@ width = 100%
             drawnItems = L.featureGroup().addTo(map);
 			var marker;
 			marker = L.marker([lat, longi]).addTo(map);
+	var latlng = [[lat, longi], [-6.2555,106.888]]
+	var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);
 			
     L.control.layers({
         'osm': osm.addTo(map),
