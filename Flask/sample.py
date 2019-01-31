@@ -209,7 +209,7 @@ def goto():
 def index():
 	for i in range(len(waypoint)):
 		print waypoint[i]
-	return render_template("index.html", latitude=str(d.vehicle.location.global_relative_frame.lat), longitude=str(d.vehicle.location.global_relative_frame.lon), altitude=str(d.vehicle.location.global_relative_frame.alt), groundspeed=str(d.vehicle.groundspeed*3.6), way = str(temp), head=str(d.vehicle.heading))
+	return render_template("index.html", latitude=str(d.vehicle.location.global_relative_frame.lat), longitude=str(d.vehicle.location.global_relative_frame.lon), altitude=str(d.vehicle.location.global_relative_frame.alt), groundspeed=str(d.vehicle.groundspeed*3.6), way = str(temp), head=str(d.vehicle.heading), wp=waypoint)
 	#return render_template('index.html', latitude=7.25, longitude=2.43, altitude=100, groundspeed=45)
 @app.route('/clearwp')
 def clearwp():
