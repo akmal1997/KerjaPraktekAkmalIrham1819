@@ -6,11 +6,14 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/body.css') }}">
 </head>
 <body>
-
     <center><h2>Drone Connect</h2></center>
     <div class="login">
+	<p>Untuk menyambungkan ke DroneKit-SITL Simulator, pilih jenis koneksi TCP, alamat ip localhost (127.0.0.1) dengan port 5760</p>
     <form action="#" method="post" novalidate>
         {{ form.hidden_tag() }}
+		<p>{{ form.conn.label }} <br> {{ form.conn }}</p>
+		<p>{{ form.ip.label }} <br> {{ form.ip }}</p>
+		<p>{{ form.port.label }} <br> {{ form.port }}</p>
         <p>{{ form.lat.label }} <br> {{ form.lat }}</p>
         <p>{{ form.lon.label }} <br> {{ form.lon }}</p>
         <p>{{ form.submit() }}</p>

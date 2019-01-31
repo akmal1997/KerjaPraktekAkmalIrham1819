@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import FloatField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Email
+from wtforms import FloatField, PasswordField, SubmitField, BooleanField, SelectField, TextField, IntegerField
+from wtforms.validators import DataRequired, Email, IPAddress, NumberRange
 from flask import Flask, request, render_template, redirect, url_for
 from dronekit import connect, VehicleMode, LocationGlobalRelative
 import time
@@ -15,28 +15,33 @@ temp = 0
 fly = 0
 la = 0
 lo = 0
+remainingDistance = 0
 waypoint = []
 groundspeed = []
 wp = []
 
 class connectform (FlaskForm):
-	lat = FloatField('Latitude', validators=[DataRequired()])
-	lon = FloatField('Longitude', validators=[DataRequired()])
+	CONNECTION_TYPE = [('tcp', 'TCP'), ('udp', 'UDP')]
+	conn = SelectField('Connection Type', choices=CONNECTION_TYPE)
+	ip = TextField('IP Address:', validators=[IPAddress(message='Must be a valid IP Address')])
+	port = IntegerField('Port:', validators=[DataRequired()])
+	lat = FloatField('Latitude', validators=[DataRequired(), NumberRange(min=-90, max=90, message='Latitude must be -90 to 90')])
+	lon = FloatField('Longitude', validators=[DataRequired(), NumberRange(min=-180, max=180, message='Longitude must be -180 to 180')])
 	submit = SubmitField('Connect!')
 
 class WaypointForm(FlaskForm):
     #global username
-    lat = FloatField('Latitude', validators=[DataRequired()])
-    lon = FloatField('Longitude', validators=[DataRequired()])
-    alt = FloatField('Altitude', validators=[DataRequired()])
-    gspeed = FloatField('Ground Speed (type -1 if you want to null)')
+    lat = FloatField('Latitude', validators=[DataRequired(), NumberRange(min=-90, max=90, message='Latitude must be -90 to 90')])
+    lon = FloatField('Longitude', validators=[DataRequired(), NumberRange(min=-180, max=180, message='Longitude must be -180 to 180')])
+    alt = FloatField('Altitude', validators=[DataRequired(), NumberRange(min=0, message='Altitude at least 0')])
+    gspeed = FloatField('Ground Speed (km/h) (type -1 if you want to null)')
     #remember_me = BooleanField('Remember Me')
     #new_wp = SubmitField('New Waypoint!')
     submit = SubmitField('Add New Waypoint!')
 
 class TakeoffForm(FlaskForm):
     #global username
-    alti = FloatField('Altitude', validators=[DataRequired()])
+    alti = FloatField('Altitude', validators=[DataRequired(), NumberRange(min=0, message='Altitude at least 0')])
     #remember_me = BooleanField('Remember Me')
     submit = SubmitField('Takeoff!')
 
@@ -44,14 +49,15 @@ class Drone(object):
 	global vehicle
 	global sitl
 	
-	def connect(self, latitude, longitude):
+	def connect(self, connection_type, ip_address, port, latitude, longitude):
 		self.sitl = dronekit_sitl.start_default()
 		a = str(latitude)
 		b = str(longitude)
 		sitl_args = ['-I0', '--model', 'quad']
 		sitl_args.append('--home=' + a + ',' + b + ',0,180')
 		self.sitl.launch(sitl_args, await_ready=True, restart=True)
-		connection_string = self.sitl.connection_string()
+		connection_string = connection_type + ":" + ip_address + ":" + port
+		print connection_string
 		self.vehicle = connect(connection_string, wait_ready=True)
 		
 	def takeoff (self, altitude):
@@ -123,9 +129,15 @@ def konek_aksi():
 	else:
 		forms = connectform()
 		if forms.validate_on_submit():
+			con_type = forms.conn.data
+			ip_addr = forms.ip.data
+			ports = forms.port.data
 			la = forms.lat.data
 			lo = forms.lon.data
-			d.connect(la, lo)
+			print con_type
+			print ip_addr
+			print ports
+			d.connect(con_type, ip_addr, str(ports), la, lo)
 			connected=1
 			print connected
 			print ("Connected! Set home location:" + str(la) + ',' + str(lo))
@@ -172,10 +184,6 @@ def waypoints():
         lon = form.lon.data
         alt = form.alt.data
         gs = form.gspeed.data
-        print (lat)
-        print (lon)
-        print (alt)
-        print (gs)
         waypoint.append(LocationGlobalRelative(lat, lon, alt))
         groundspeed.append(gs)
 		#wp.append()
@@ -189,29 +197,37 @@ def waypoints():
 	
 @app.route('/goto')
 def goto():
-	global temp, waypoint
-	if len(waypoint) == 0:
-		return redirect('/waypoint')
+	global temp, waypoint, fly, remainingDistance
+	if fly == 0:
+		return render_template("gotoerror.html")
 	else:
-		for i in range(temp,len(waypoint)):
-			targetDistance = get_distance_metres(d.vehicle.location.global_frame, waypoint[i])
-			print 'Go to Waypoint', temp
-			d.goto(waypoint[i], groundspeed[i])
-			temp = temp + 1;
-			while d.vehicle.mode.name == 'GUIDED':
-				remainingDistance = get_distance_metres(d.vehicle.location.global_frame, waypoint[i])
-				#print "Distance to waypoint", i,":", remainingDistance
-				if remainingDistance <= targetDistance * 0.01:
-					#print "Reached Target"
-					break
-				#time.sleep(3)
-		return redirect('/menu')
+		if len(waypoint) == 0:
+			return redirect('/waypoint')
+		else:
+			for i in range(temp,len(waypoint)):
+				targetDistance = get_distance_metres(d.vehicle.location.global_frame, waypoint[i])
+				print 'Go to Waypoint', temp
+				if groundspeed[i] == -1:
+					d.goto(waypoint[i], -1)
+				else:
+					d.goto(waypoint[i], (groundspeed[i]/3.6))
+				temp = temp + 1;
+				while d.vehicle.mode.name == 'GUIDED':
+					remainingDistance = get_distance_metres(d.vehicle.location.global_frame, waypoint[i])
+					#print "Distance to waypoint", i,":", remainingDistance
+					if remainingDistance <= targetDistance * 0.01:
+						#print "Reached Target"
+						break
+					#time.sleep(3)
+			return redirect('/menu')
 	
 @app.route('/menu')
 def index():
-	for i in range(len(waypoint)):
-		print waypoint[i]
-	return render_template("index.html", latitude=str(d.vehicle.location.global_relative_frame.lat), longitude=str(d.vehicle.location.global_relative_frame.lon), altitude=str(d.vehicle.location.global_relative_frame.alt), groundspeed=str(d.vehicle.groundspeed*3.6), way = str(temp), head=str(d.vehicle.heading), wp=waypoint, las=la, los=lo)
+	global connected, remainingDistance
+	if connected == 0:
+		return redirect('/connect')
+	else:
+		return render_template("index.html", latitude=str(d.vehicle.location.global_relative_frame.lat), longitude=str(d.vehicle.location.global_relative_frame.lon), altitude=str(d.vehicle.location.global_relative_frame.alt), battery =str(d.vehicle.battery.level), airspeed=str(d.vehicle.airspeed*3.6), groundspeed=str(d.vehicle.groundspeed*3.6), way = str(temp), head=str(d.vehicle.heading), wp=waypoint, las=la, los=lo, rem= remainingDistance)
 	#return render_template('index.html', latitude=7.25, longitude=2.43, altitude=100, groundspeed=45)
 @app.route('/clearwp')
 def clearwp():

@@ -147,9 +147,10 @@ width = 100%
         <p>Longitude: {{longitude}}</p>
         <p>Altitude: {{altitude}} m</p>
         <p>Heading: {{head}}</p>
-        <p>Speed: {{groundspeed}} kmh</p>
-        <p>Battery: </p>
-		    <p> Go to waypoint {{way}}</p>
+		<p>Airspeed: {{airspeed}}</p>
+        <p>Ground Speed: {{groundspeed}} kmh</p>
+        <p>Battery: {{battery}} </p>
+		<p> Go to waypoint {{way}}</p>
         <br><br>
         </div>
 
@@ -169,13 +170,21 @@ width = 100%
             drawnItems = L.featureGroup().addTo(map);
 			var marker;
 			marker = L.marker([lat, longi]).addTo(map);
+			marker.bindPopup("<b>This is my current location!</b> <p>{{latitude}}, {{longitude}}</p>").openPopup()
 
 	var latlng = [[{{las}}, {{los}}]]
-	var mark = L.marker(latlng).addTo(mymap);
+	var wp_lat = []
+	var wp_lon = []
+	wp_lat.push({{las}})
+	wp_lon.push({{los}})
+	//var mark = L.marker([wp_lat[0],wp_lon[0]]).addTo(map);
+	var mark = L.marker([{{las}}, {{los}}]).addTo(map);
+	//mark.bindPopup("<b>Start Locationt</b>").openPopup()
 	window.onload = function () {
 		{% for i in range(0,wp|length) %}
 		latlng.push([{{wp[i].lat}}, {{wp[i].lon}}])
-		mark = L.marker(latlng).addTo(mymap);
+		var wkwkwk = L.marker([{{wp[i].lat}}, {{wp[i].lon}}]).addTo(map);
+		//wkwkwk.bindPopup("<b>Waypoint</b>").openPopup()
 		{% endfor %}
 		var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);
 		console.log(latlng)
