@@ -87,7 +87,7 @@ Main components
 #cd-intro {
   position: relative;
   height: 100%;
-  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/bg-img.jpg") no-repeat center center;
+  background: url("splash.jpg") no-repeat center center;
   background-size: cover;
 }
 #cd-intro h1 {
