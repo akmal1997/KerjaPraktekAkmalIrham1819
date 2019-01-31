@@ -170,7 +170,7 @@ width = 100%
 			var marker;
 			marker = L.marker([lat, longi]).addTo(map);
 
-	var latlng = [[lat, longi]]
+	var latlng = [[{{las}}, {{los}}]]
 	window.onload = function () {
 		{% for i in range(0,wp|length) %}
 		latlng.push([{{wp[i].lat}}, {{wp[i].lon}}])
