@@ -110,9 +110,9 @@ def how_to_use():
 @app.route('/')
 def main_menu():
 	return render_template("menu.html")
-#@app.route('/hehe')
-#def static_file():
-#	return app.send_static_file('index.html')
+@app.route('/aboutus')
+def about_us():
+	return render_template("aboutus.html")
 @app.route('/connect', methods = ['GET', 'POST'])
 def konek_aksi():
 	global connected
@@ -224,5 +224,5 @@ def landing():
 	return render_template("landing_sukses.html")
 	
 if __name__ == "__main__":
-	app.run(host='127.0.0.1', port=5000, threaded=True)
+	app.run(host='0.0.0.0', port=5000, threaded=True)
 	#socketio.run(app, port=5000)
