@@ -187,23 +187,28 @@ def waypoints():
 	
 @app.route('/goto')
 def goto():
-	global temp
-	for i in range(temp,len(waypoint)):
-		targetDistance = get_distance_metres(d.vehicle.location.global_frame, waypoint[i])
-		print 'Go to Waypoint', temp
-		d.goto(waypoint[i], groundspeed[i])
-		temp = temp + 1;
-		while d.vehicle.mode.name == 'GUIDED':
-			remainingDistance = get_distance_metres(d.vehicle.location.global_frame, waypoint[i])
-			#print "Distance to waypoint", i,":", remainingDistance
-			if remainingDistance <= targetDistance * 0.01:
-				#print "Reached Target"
-				break
-			#time.sleep(3)
-	return redirect('/menu')
+	global temp, waypoint
+	if len(waypoint) == 0:
+		return redirect('/waypoint')
+	else:
+		for i in range(temp,len(waypoint)):
+			targetDistance = get_distance_metres(d.vehicle.location.global_frame, waypoint[i])
+			print 'Go to Waypoint', temp
+			d.goto(waypoint[i], groundspeed[i])
+			temp = temp + 1;
+			while d.vehicle.mode.name == 'GUIDED':
+				remainingDistance = get_distance_metres(d.vehicle.location.global_frame, waypoint[i])
+				#print "Distance to waypoint", i,":", remainingDistance
+				if remainingDistance <= targetDistance * 0.01:
+					#print "Reached Target"
+					break
+				#time.sleep(3)
+		return redirect('/menu')
 	
 @app.route('/menu')
 def index():
+	for i in range(len(waypoint)):
+		print waypoint[i]
 	return render_template("index.html", latitude=str(d.vehicle.location.global_relative_frame.lat), longitude=str(d.vehicle.location.global_relative_frame.lon), altitude=str(d.vehicle.location.global_relative_frame.alt), groundspeed=str(d.vehicle.groundspeed*3.6), way = str(temp), head=str(d.vehicle.heading))
 	#return render_template('index.html', latitude=7.25, longitude=2.43, altitude=100, groundspeed=45)
 @app.route('/clearwp')

@@ -150,7 +150,6 @@ width = 100%
         <p>Battery: </p>
 		    <p> Go to waypoint {{way}}</p>
         <br><br>
-        <button onclick="window.location.href='/disconnect'" class="tombol">Disconnect</button>
         </div>
 
 <div id="map" style="position: absolute; width: 1100px; height: 600px; left: 260px; top: 70px; right: 100px; border: 1px solid #ccc"></div>
@@ -171,6 +170,13 @@ width = 100%
 			marker = L.marker([lat, longi]).addTo(map);
 
 	var latlng = [[lat, longi]]
+	window.onload = function () {
+		latlng.push([lat, longi])
+		console.log(latlng)
+	};
+	
+	//window.onload(addLine);
+	
 	var polyline = L.polyline(latlng, {color: 'red'}).addTo(map);		
     L.control.layers({
         'osm': osm.addTo(map),
