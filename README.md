@@ -8,7 +8,7 @@ Requirements: Flask, Python 2.7, flask_wtf, dronekit, dronekit_sitl, wtforms, wt
 Cara menjalankan software:
 
 Linux (Debian Based):
-1. Install requirements
+1. Buka terminal dan install requirements
 2. Arahkan ke folder Flask
 3. Ketikan export FLASK_APP=sample.py
 4. Jalankan software dengan mengetik flask run --host=0.0.0.0
