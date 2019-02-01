@@ -68,7 +68,15 @@
 								<img src="{{ url_for('static', filename='img/otw.PNG') }}" alt="main menu" height="350", width="500">
 								<p>Jika berhasil, maka akan muncul tampilan seperti ini di halaman monitoring.</p>
 								</li>
-								
+								<li>Untuk mendaratkan pesawat, klik <b>Landing.</b> Setelah itu akan dialihkan ke halaman monitoring.</li>
+								<li>Untuk menghapus waypoint, klik <b>Clear Waypoints</b>. Pastikan pesawat telah didaratkan sebelum menghapus waypoint. <br>
+								<p>Error yang akan terjadi:</p>
+								<ul>
+									<img src="{{ url_for('static', filename='img/clearwperror.PNG') }}" alt="main menu" height="350", width="500">
+									<li>Jika belum mendaratkan pesawat, maka muncul pesan error seperti di atas. Klik <b>Daratkan Pesawat Ini</b> untuk mendaratkan drone,
+									atau klik <b>Kembali ke menu utama</b> untuk kembali ke halaman monitoring.</li>
+								</ul></li>
+								<li>Untuk mendisconnect dengan drone, klik <b>Disconnect</b>. Kemudian, akan dialihkan ke halaman utama dan semua waypoint akan dihapus.</li>
 							</ul>
 						<ul class="actions">
 							<center><li><a href="/" class="button special big">KEMBALI KE MENU UTAMA</a></li></center>
