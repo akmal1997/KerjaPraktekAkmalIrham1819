@@ -20,8 +20,17 @@
 							<p>Drone Monitoring Apps</p>
 						</header>
 						<div class="content">
-							<p>Blablabalablablablaba</p>
-
+							<ul>
+								<img src="{{ url_for('static', filename='img/main_menu.PNG') }}" alt="main menu" height="350", width="500">
+								<li><p>Pertama, buka http://localhost:5000 atau http://127.0.0.1:5000 pada browser. Lalu klik
+								tombol MENU di bawah</p></li>
+								<li><p>Kemudian pada "MENU" klik "Mulai Drone Monitoring" untuk memulai drone tracking.</p></li>
+								<img src="{{ url_for('static', filename='img/connect.PNG') }}" alt="main menu" height="350", width="500">
+								<li><p>Kemudian muncul halaman koneksi. Masukkan jenis koneksi, IP address, port pada drone (untuk menyambungkan ke Dronekit-SITL simulator, 
+								masukkan jenis koneksi TCP, ip address 127.0.0.1, port 5760. Kemudian Masukkan garis lintang dan garis bujur home location dronenya.</p></li>
+								<img src="{{ url_for('static', filename='img/sukses_connect.PNG') }}" alt="main menu" height="350", width="500">
+								<li><p>"Tunggu beberapa saat, lalu akan muncul halaman yang memberitahukan bahwa koneksi sukses. Lalu klik "Kembali ke menu utama""</p></li>
+							</ul>
 						<ul class="actions">
 							<center><li><a href="/" class="button special big">KEMBALI KE MENU UTAMA</a></li></center>
 						</ul>
