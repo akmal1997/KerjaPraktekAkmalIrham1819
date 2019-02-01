@@ -247,8 +247,8 @@ def landing():
 	global fly, la, lo
 	d.land()
 	fly = 0
-	la = d.vehicle.location.global_relative_frame.lat
-	lo = d.vehicle.location.global_relative_frame.lon
+	#la = d.vehicle.location.global_relative_frame.lat
+	#lo = d.vehicle.location.global_relative_frame.lon
 	return render_template("landing_sukses.html")
 
 @app.route('/rtl')
