@@ -6,9 +6,12 @@
 </head>
 <body>
         <center><h2>Go To Error</h2></center>
+        <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
 		<center><p>Untuk dapat memulai perjalanan drone, Anda harus take-off drone ini terlebih dahulu!</p></center>
 		<center><button onclick="window.location.href = '/takeoff';">Takeoff drone ini</button></center>
 		<center><p>-atau-</p></center>
         <center><button onclick="window.location.href = '/menu';">Kembali ke menu utama</button></center>
+    	</form>
 </body>
 </html>
