@@ -35,9 +35,40 @@
 								<img src="{{ url_for('static', filename='img/navbar.PNG') }}" alt="main menu" height="100", width="900">
 								<li><p>Pada Navbar, terdapat menu:</p>
 									<ul>
-									<li><p>Halaman Utama, untuk kembali ke halaman utama.</p></li>
+									<li><p><b>Halaman Utama</b>, untuk kembali ke halaman utama.</p></li>
+									<li><p><b>Cara Pakai</b>, untuk melihat cara pakai aplikasi ini.</p></li>
+									<li><p><b>Monitoring</b>, untuk melihat posisi dan data telemetri drone.</p></li>
+									<li><p><b>Add New Waypoint</b>, untuk menambahkan waypoint baru.</p></li>
+									<li><p><b>Takeoff</b>, untuk menerbangkan drone.</p></li>
+									<li><p><b>Go To</b>, untuk menjalankan drone melalui waypoint yang telah di-<i>set</i>.</p></li>
+									<li><p><b>Landing</b>, untuk mendaratkan drone.</p></li>
+									<li><p><b>Clear Waypoints</b>, untuk menghapus waypoint. Tetapi untuk melakukan hal itu harus mendaratkan drone terlebih dahulu.</p></li>
+									<li><p><b>Disconnect</b>, untuk memutuskan sambungan dengan drone.</p></li>
 									</ul>
 								</li>
+								<img src="{{ url_for('static', filename='img/wp1.PNG') }}" alt="main menu" height="350", width="500">		
+								<li><p>Untuk menambahkan waypoint, klik tombol <b>Add New Waypoint</b> pada navbar, lalu muncul tampilan seperti di atas. Isi latitude, longi
+								tude, ketinggian, dan kecepatan yang diinginkan. Jika menginginkan kecepatan default, maka masukkan -1 pada kecepatan.</p></li>
+								<img src="{{ url_for('static', filename='img/wp2.PNG') }}" alt="main menu" height="350", width="500">
+								<li><p>Jika sudah menambahkan waypoint, maka daftar waypoint akan tampil di bawah dan pada peta di halaman monitoring. Kemudian jika kita telah
+								selesai menambahkan waypoint, klik <b>Go To</b> untuk memulai perjalanan, atau <b>Main Menu</b> untuk kembali ke halaman monitoring.</p></li>
+								<img src="{{ url_for('static', filename='img/takeoff1.PNG') }}" alt="main menu" height="350", width="500">
+								<li><p>Untuk take off, klik <b>Takeoff</b> pada navbar. Kemudian muncul halaman seperti di atas. Masukkan altitude yang diinginkan lalu klik <b>
+								Takeoff!</b></p></li>
+								<img src="{{ url_for('static', filename='img/takeoff2.PNG') }}" alt="main menu" height="350", width="500">
+								<li><p>Setelah takeoff berhasil, muncul halaman seperti di atas, kemudian klik <b>Kembali ke menu utama</b>.</p></li>
+								<li><p>Untuk memulai perjalanan, klik <b>Go To</b>. Pastikan sudah men-set waypoint dan men-takeoff kan drone terlebih dahulu!<br>
+								<p>Error yang akan terjadi:</p>
+								<ul>
+									<li>Jika belum men-set waypoint, maka akan dialihkan ke halaman waypoint untuk men-set waypoint terlebih dahulu.</li>
+									<img src="{{ url_for('static', filename='img/gotoerror.PNG') }}" alt="main menu" height="350", width="500">
+									<li>Jika belum men-takeoffkan drone, maka akan muncul pesan error seperti di atas. Klik <b>Takeoff</b> untuk menerbangkan drone, 
+									atau klik <b>Kembali ke menu utama</b> untuk kembali ke halaman monitoring.</li>
+								</ul>
+								<img src="{{ url_for('static', filename='img/otw.PNG') }}" alt="main menu" height="350", width="500">
+								<p>Jika berhasil, maka akan muncul tampilan seperti ini di halaman monitoring.</p>
+								</li>
+								
 							</ul>
 						<ul class="actions">
 							<center><li><a href="/" class="button special big">KEMBALI KE MENU UTAMA</a></li></center>
