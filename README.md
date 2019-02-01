@@ -14,6 +14,8 @@ Linux (Debian Based):
 4. Jalankan software dengan mengetik flask run --host=0.0.0.0
 5. Jika dijalankan dalam 1 komputer, maka ketiklah localhost:5000 di browser untuk memunculkan UInya. Jika dijalankan dalam beda komputer, ketikan IP Address (bisa dilihat menggunakan ifconfig) dan juga portnya tetap 5000 (Contoh: Jika komputer anda memiliki IP Address 10.151.12.15, maka ketikan 10.151.12.15:5000 di browser anda)
 
+Alhamdulilah, proyek ini telah selesai dan dipresentasikan di Ruang Multimedia 2, Pusat Teknologi Elektronika, BPPT - Serpong, Tangsel pada Jumat, 1 Februari 2019 pukul 15:08 WIB. Namun masih membutuhkan pengembangan lebih lanjut
+
 Departemen Informatika
 Institut Teknologi Sepuluh Nopember (ITS)
 Surabaya, Jawa Timur
