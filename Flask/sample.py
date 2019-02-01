@@ -83,6 +83,9 @@ class Drone(object):
 	def land(self):
 		self.vehicle.mode = VehicleMode("LAND")
 		
+	def rtl(self):
+		self.vehicle.mode = VehicleMode("LAND")
+		
 	def disconnect(self):
 		#Close vehicle object before exiting script
 		print("\nClose vehicle object")
@@ -245,6 +248,13 @@ def landing():
 	d.land()
 	fly = 0
 	return render_template("landing_sukses.html")
+
+@app.route('/rtl')
+def launch():
+	global temp
+	d.rtl()
+	temp = 0
+	return redirect('/menu')
 	
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=5000, threaded=True)
