@@ -1,0 +1,24 @@
+body {
+background-image: url("backgroundformulir.jpg");
+background-size: cover;
+font-family: tahoma;
+}
+h2 {
+color: aqua;
+text-shadow: 3px 2px black;
+}
+div {
+  margin: auto;
+  width: auto;
+  height: auto;
+  padding: 20px;
+  background: lightblue;
+}
+
+.content-box { 
+  box-sizing: content-box; 
+  font-size: 10pt;
+  color: #555;
+  font-family: Trebuchet MS;
+  text-align: center;
+}

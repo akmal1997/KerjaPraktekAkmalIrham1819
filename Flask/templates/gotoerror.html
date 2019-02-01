@@ -2,16 +2,15 @@
 <html>
 <head>
 	<title>Go To Error</title>
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/body.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/error.css') }}">
 </head>
 <body>
-        <center><h2>Go To Error</h2></center>
-        <form action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-		<center><p>Untuk dapat memulai perjalanan drone, Anda harus take-off drone ini terlebih dahulu!</p></center>
-		<center><button onclick="window.location.href = '/takeoff';">Takeoff drone ini</button></center>
-		<center><p>-atau-</p></center>
-        <center><button onclick="window.location.href = '/menu';">Kembali ke menu utama</button></center>
-    	</form>
+	<center><h2>Go To Error</h2></center>
+		<div class="content-box">
+			<center><p>Untuk dapat memulai perjalanan drone, Anda harus take-off drone ini terlebih dahulu!</p></center>
+			<center><button onclick="window.location.href = '/takeoff';">Takeoff drone ini</button></center>
+			<center><p>-atau-</p></center>
+        	<center><button onclick="window.location.href = '/menu';">Kembali ke menu utama</button></center>
+        </div>
 </body>
 </html>

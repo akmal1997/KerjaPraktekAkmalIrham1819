@@ -2,13 +2,15 @@
 <html>
 <head>
 	<title>Hapus Waypoint Error</title>
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/body.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/error.css') }}">
 </head>
 <body>
-        <center><h2>Hapus Waypoint Error</h2></center>
+	<center><h2>Hapus Waypoint Error</h2></center>
+		<div class="content-box">
 		<center><p>Untuk dapat menghapus waypoint, Anda harus mendaratkan drone ini terlebih dahulu!</p></center>
 		<center><button onclick="window.location.href = '/land';">Daratkan pesawat ini</button></center>
 		<center><p>-atau-</p></center>
         <center><button onclick="window.location.href = '/menu';">Kembali ke menu utama</button></center>
+        </div>
 </body>
 </html>
