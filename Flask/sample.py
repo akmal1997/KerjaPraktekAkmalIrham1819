@@ -8,6 +8,8 @@ import dronekit_sitl
 import argparse
 import math
 
+username = 0
+loggedin = 0
 vehicle = 0
 sitl = 0
 connected = 0
@@ -28,6 +30,11 @@ class connectform (FlaskForm):
 	lat = FloatField('Latitude', validators=[DataRequired(), NumberRange(min=-90, max=90, message='Latitude must be -90 to 90')])
 	lon = FloatField('Longitude', validators=[DataRequired(), NumberRange(min=-180, max=180, message='Longitude must be -180 to 180')])
 	submit = SubmitField('Connect!')
+
+class loginform (FlaskForm):
+	username = TextField('Username:', validators=[DataRequired()])
+	password = PasswordField('Password', validators=[DataRequired()])
+	submit = SubmitField('Log in!')
 
 class WaypointForm(FlaskForm):
     #global username
@@ -124,28 +131,52 @@ def main_menu():
 @app.route('/aboutus')
 def about_us():
 	return render_template("aboutus.html")
+
+@app.route('/login', methods = ['GET', 'POST'])
+def login():
+	global username, loggedin
+	if loggedin == 1:
+		return redirect('/')
+	else:
+		forms = loginform()
+		if forms.validate_on_submit():
+			name = forms.username.data
+			password = forms.password.data
+			print name, password
+			if (name == 'admin' and password == 'admin'):
+				loggedin = 1
+				username = name
+				return render_template('login_sukses.html')
+			else:
+				return render_template('login_gagal.html')
+		return render_template('login.html', form=forms)
+
+
 @app.route('/connect', methods = ['GET', 'POST'])
 def konek_aksi():
-	global connected, la, lo
-	if connected == 1:
-		return redirect('/menu')
+	global connected, la, lo, loggedin
+	if loggedin == 0:
+		return redirect('/login')
 	else:
-		forms = connectform()
-		if forms.validate_on_submit():
-			con_type = forms.conn.data
-			ip_addr = forms.ip.data
-			ports = forms.port.data
-			la = forms.lat.data
-			lo = forms.lon.data
-			print con_type
-			print ip_addr
-			print ports
-			d.connect(con_type, ip_addr, str(ports), la, lo)
-			connected=1
-			print connected
-			print ("Connected! Set home location:" + str(la) + ',' + str(lo))
-			return render_template("connect_sukses.html")
-		return render_template('connect.html', form=forms)
+		if connected == 1:
+			return redirect('/menu')
+		else:
+			forms = connectform()
+			if forms.validate_on_submit():
+				con_type = forms.conn.data
+				ip_addr = forms.ip.data
+				ports = forms.port.data
+				la = forms.lat.data
+				lo = forms.lon.data
+				print con_type
+				print ip_addr
+				print ports
+				d.connect(con_type, ip_addr, str(ports), la, lo)
+				connected=1
+				print connected
+				print ("Connected! Set home location:" + str(la) + ',' + str(lo))
+				return render_template("connect_sukses.html")
+			return render_template('connect.html', form=forms)
 
 @app.route('/disconnect')
 def diskonek():
@@ -155,24 +186,27 @@ def diskonek():
 	connected = 0
 	fly = 0
 	print connected
-	return redirect('/')
+	return redirect('/connect')
 
 @app.route('/takeoff', methods = ['GET', 'POST'])
 def takeoff():
-	global fly
-	form2=TakeoffForm()
-	if form2.validate_on_submit():
-		altitude = form2.alti.data
-		d.takeoff(altitude)
-		while True:
-			#return str(d.vehicle.location.global_relative_frame.alt)
-			return render_template("takeoff_sukses.html")
-			if d.vehicle.location.global_relative_frame.alt >= alt*0.95:
-				return "Reached target altitude"
-				break
-		#print altitude
-	fly = 1
-	return render_template('takeoff.html', form=form2)
+	global fly, connected
+	if connected == 0:
+		return redirect('/connect')
+	else:
+		form2=TakeoffForm()
+		if form2.validate_on_submit():
+			altitude = form2.alti.data
+			d.takeoff(altitude)
+			while True:
+				#return str(d.vehicle.location.global_relative_frame.alt)
+				return render_template("takeoff_sukses.html")
+				if d.vehicle.location.global_relative_frame.alt >= alt*0.95:
+					return "Reached target altitude"
+					break
+			#print altitude
+		fly = 1
+		return render_template('takeoff.html', form=form2)
 
 @app.route('/track')
 def track():
@@ -257,6 +291,18 @@ def launch():
 	d.rtl()
 	temp = 0
 	return redirect('/menu')
+
+@app.route('/logout')
+def logout():
+	global loggedin, connected, fly
+	if loggedin == 0:
+		return redirect('/')
+	loggedin = 0
+	connected = 0
+	fly = 0
+	clearwayp()
+	d.disconnect()
+	return redirect('/')
 	
 if __name__ == "__main__":
 	app.run(host='0.0.0.0', port=5000, threaded=True)

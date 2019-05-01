@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Log in</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/body.css') }}">
+</head>
+<body>
+    <center><h2>Login ke sistem drone</h2></center>
+    <div class="login">
+	<p>Gunakan form ini untuk login ke sistem drone.</p>
+    <form action="#" method="post" novalidate>
+        {{ form.hidden_tag() }}
+		<p>{{ form.username.label }} <br> {{ form.username }}</p>
+		<p>{{ form.password.label }} <br> {{ form.password }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+	</body>
+	</html>
+
