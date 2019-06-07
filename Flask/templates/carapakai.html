@@ -23,16 +23,16 @@
 							<p>Aplikasi ini kompatibel dengan drone yang berkomunikasi dengan protokol MAVlink dan dapat berjalan pada Windows, Linux atau Mac OS.</p>
 							<ul>
 								<img src="{{ url_for('static', filename='img/main_menu.PNG') }}" alt="main menu" height="350", width="500">
-								<li><p>Pertama, buka <b>http://localhost:5000</b> atau <b>http://127.0.0.1:5000</b> pada browser. Lalu klik
-								tombol <b>MENU</b> di bawah</p></li>
-								<li><p>Kemudian pada "MENU" klik "Mulai Drone Monitoring" untuk memulai drone tracking.</p></li>
+								<li><p>Pertama, Anda dapat membuka <b>http://localhost:5000</b> atau <b>http://127.0.0.1:5000</b> pada browser. Kemudian Anda dapat meng..klik
+								tombol <b>MENU</b> di bawah.</p></li>
+								<li><p>Kemudian pada "MENU" Anda dapat mengklik "Mulai Drone Monitoring" untuk memulai drone tracking.</p></li>
 								<img src="{{ url_for('static', filename='img/connect.PNG') }}" alt="main menu" height="350", width="500">
-								<li><p>Kemudian muncul halaman koneksi. Masukkan jenis koneksi, IP address, port pada drone (untuk menyambungkan ke Dronekit-SITL simulator, 
-								masukkan jenis koneksi TCP, ip address 127.0.0.1, port 5760. Kemudian Masukkan garis lintang dan garis bujur home location dronenya.</p></li>
+								<li><p>Setelah beberapa saat, muncul halaman koneksi. Kemudian Anda dapat memasukkan jenis koneksi, IP address, port pada drone (untuk menyambungkan ke Dronekit-SITL simulator, 
+								masukkan jenis koneksi TCP, ip address 127.0.0.1, port 5760. Masukkan pula garis lintang dan garis bujur home location dronenya.</p></li>
 								<img src="{{ url_for('static', filename='img/sukses_connect.PNG') }}" alt="main menu" height="350", width="500">
 								<li><p>Tunggu beberapa saat, lalu akan muncul halaman yang memberitahukan bahwa koneksi sukses. Lalu klik "Kembali ke menu utama"</p></li>
 								<img src="{{ url_for('static', filename='img/main.PNG') }}" alt="main menu" height="350", width="500">
-								<li><p>Kemudian muncul halaman utama yang menampilkan peta, navbar, dan data telemetri drone.</p></li>
+								<li><p>Kemudian setelah beberapa saat muncul halaman utama yang menampilkan peta, navbar, dan data telemetri drone.</p></li>
 								<img src="{{ url_for('static', filename='img/navbar.PNG') }}" alt="main menu" height="100", width="900">
 								<li><p>Pada Navbar, terdapat menu:</p>
 									<ul>
@@ -48,29 +48,29 @@
 									</ul>
 								</li>
 								<img src="{{ url_for('static', filename='img/wp1.PNG') }}" alt="main menu" height="350", width="500">		
-								<li><p>Untuk menambahkan waypoint, klik tombol <b>Add New Waypoint</b> pada navbar, lalu muncul tampilan seperti di atas. Isi latitude, longi
+								<li><p>Untuk menambahkan waypoint, Anda dapat mengklik tombol <b>Add New Waypoint</b> pada navbar, lalu muncul tampilan seperti di atas. Isi latitude, longi
 								tude, ketinggian, dan kecepatan yang diinginkan. Jika menginginkan kecepatan default, maka masukkan -1 pada kecepatan.</p></li>
 								<img src="{{ url_for('static', filename='img/wp2.PNG') }}" alt="main menu" height="350", width="500">
-								<li><p>Jika sudah menambahkan waypoint, maka daftar waypoint akan tampil di bawah dan pada peta di halaman monitoring. Kemudian jika kita telah
-								selesai menambahkan waypoint, klik <b>Go To</b> untuk memulai perjalanan, atau <b>Main Menu</b> untuk kembali ke halaman monitoring.</p></li>
+								<li><p>Jika sudah menambahkan waypoint, maka daftar waypoint akan tampil di bawah dan pada peta di halaman monitoring. Kemudian jika Anda telah
+								selesai menambahkan waypoint, Anda dapat mengklik <b>Go To</b> untuk memulai perjalanan, atau <b>Main Menu</b> untuk kembali ke halaman monitoring.</p></li>
 								<img src="{{ url_for('static', filename='img/takeoff1.PNG') }}" alt="main menu" height="350", width="500">
-								<li><p>Untuk take off, klik <b>Takeoff</b> pada navbar. Kemudian muncul halaman seperti di atas. Masukkan altitude yang diinginkan lalu klik <b>
+								<li><p>Untuk take off, klik <b>Takeoff</b> pada navbar. Kemudian muncul halaman seperti di atas. Masukkan altitude yang Anda inginkan lalu klik <b>
 								Takeoff!</b></p></li>
 								<img src="{{ url_for('static', filename='img/takeoff2.PNG') }}" alt="main menu" height="350", width="500">
 								<li><p>Setelah takeoff berhasil, muncul halaman seperti di atas, kemudian klik <b>Kembali ke menu utama</b>.</p></li>
 								<li><p>Untuk memulai perjalanan, klik <b>Go To</b>. Pastikan sudah men-set waypoint dan men-takeoff kan drone terlebih dahulu!<br>
 								<p>Error yang akan terjadi:</p>
 								<ul>
-									<li>Jika belum men-set waypoint, maka akan dialihkan ke halaman waypoint untuk men-set waypoint terlebih dahulu.</li>
+									<li>Jika belum men-set waypoint, maka Anda akan dialihkan ke halaman waypoint untuk men-set waypoint terlebih dahulu.</li>
 									<img src="{{ url_for('static', filename='img/gotoerror.PNG') }}" alt="main menu" height="350", width="500">
-									<li>Jika belum men-takeoffkan drone, maka akan muncul pesan error seperti di atas. Klik <b>Takeoff</b> untuk menerbangkan drone, 
+									<li>Jika belum men-takeoffkan drone, maka akan muncul pesan error seperti di atas. Anda dapat mengklik <b>Takeoff</b> untuk menerbangkan drone, 
 									atau klik <b>Kembali ke menu utama</b> untuk kembali ke halaman monitoring.</li>
 								</ul>
 								<img src="{{ url_for('static', filename='img/otw.PNG') }}" alt="main menu" height="350", width="500">
 								<p>Jika berhasil, maka akan muncul tampilan seperti ini di halaman monitoring.</p>
 								</li>
-								<li>Untuk mendaratkan pesawat, klik <b>Landing.</b> Setelah itu akan dialihkan ke halaman monitoring.</li>
-								<li>Untuk menghapus waypoint, klik <b>Clear Waypoints</b>. Pastikan pesawat telah didaratkan sebelum menghapus waypoint. <br>
+								<li>Untuk mendaratkan pesawat, Anda dapat mengklik <b>Landing.</b> Setelah itu akan dialihkan ke halaman monitoring.</li>
+								<li>Untuk menghapus waypoint, Anda dapat mengklik <b>Clear Waypoints</b>. Pastikan pesawat telah didaratkan sebelum menghapus waypoint. <br>
 								<p>Error yang akan terjadi:</p>
 								<ul>
 									<img src="{{ url_for('static', filename='img/clearwperror.PNG') }}" alt="main menu" height="350", width="500">
